@@ -15,10 +15,13 @@ form.addEventListener('input', event => {
 
   function reloadPage() {
     if (getInfoForm) {
-      submitObject = {
-        email: getInfoForm.email,
-        message: getInfoForm.message,
-      };
+      input.value = getInfoForm.email;
+      textarea.value = getInfoForm.message;
+
+      // submitObject = {
+      //   email: getInfoForm.email,
+      //   message: getInfoForm.message,
+      // };
     }
   }
   reloadPage();
