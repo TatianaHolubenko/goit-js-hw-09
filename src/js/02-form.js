@@ -13,6 +13,15 @@ const getInfoForm =
 form.addEventListener('input', event => {
   const nodeName = event.target.nodeName;
 
+  function reloadPage() {
+    if (getInfoForm) {
+      submitObject = {
+        email: getInfoForm.email,
+        message: getInfoForm.message,
+      };
+    }
+  }
+  reloadPage();
   if (nodeName === 'INPUT' || nodeName === 'TEXTAREA') {
     submitObject = {
       email: input.value.trim(),
@@ -32,6 +41,6 @@ form.addEventListener('submit', event => {
     console.log(submitObject);
   }
 
-  localStorage.removeItem('feedback-form-state');
   form.reset();
+  localStorage.removeItem('feedback-form-state');
 });
