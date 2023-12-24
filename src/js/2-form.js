@@ -2,31 +2,31 @@ const form = document.querySelector('.feedback-form');
 const input = document.querySelector('input');
 const textarea = document.querySelector('textarea');
 
-let submitObject = {
+let formObject = {
   email: '',
   message: '',
 };
 
 const getInfoForm =
   JSON.parse(localStorage.getItem('feedback-form-state')) || [];
+reloadPage();
+function reloadPage() {
+  if (getInfoForm) {
+    input.element.value = getInfoForm.email;
+    textarea.value = getInfoForm.message;
+
+    // formObject = {
+    //   email: getInfoForm.email,
+    //   message: getInfoForm.message,
+    // };
+  }
+}
 
 form.addEventListener('input', event => {
   const nodeName = event.target.nodeName;
 
-  function reloadPage() {
-    if (getInfoForm) {
-      input.value = getInfoForm.email;
-      textarea.value = getInfoForm.message;
-
-      // submitObject = {
-      //   email: getInfoForm.email,
-      //   message: getInfoForm.message,
-      // };
-    }
-  }
-  reloadPage();
   if (nodeName === 'INPUT' || nodeName === 'TEXTAREA') {
-    submitObject = {
+    formObject = {
       email: input.value.trim(),
       message: textarea.value.trim(),
     };
