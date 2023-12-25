@@ -23,11 +23,14 @@ form.addEventListener('input', event => {
   const nodeName = event.target.nodeName;
 
   if (nodeName === 'INPUT' || nodeName === 'TEXTAREA') {
+    // formObject = {
+    //   email: input.value.trim(),
+    //   message: textarea.value.trim(),
+    // };
     formObject = {
-      email: input.value.trim(),
-      message: textarea.value.trim(),
+      email: event.target.value.trim(),
+      message: event.target.value.trim(),
     };
-
     localStorage.setItem('feedback-form-state', JSON.stringify(formObject));
   }
 });
@@ -35,8 +38,8 @@ form.addEventListener('input', event => {
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (input.value === '' || textarea.value === '') {
-    alert('Complete all the ribbons!');
+  if (formObject.email === '' || formObject.message === '') {
+    alert('Please, fill in all fields!');
   } else {
     console.log(formObject);
   }
