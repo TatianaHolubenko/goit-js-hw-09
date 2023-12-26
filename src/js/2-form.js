@@ -20,17 +20,14 @@ function fillInfoForm() {
 }
 
 form.addEventListener('input', event => {
+  const value = event.target.value;
   const nodeName = event.target.nodeName;
 
-  if (nodeName === 'INPUT' || nodeName === 'TEXTAREA') {
-    // formObject = {
-    //   email: input.value.trim(),
-    //   message: textarea.value.trim(),
-    // };
-    formObject = {
-      email: event.target.value.trim(),
-      message: event.target.value.trim(),
-    };
+  if (nodeName === 'INPUT') {
+    formObject.email = value.trim();
+    localStorage.setItem('feedback-form-state', JSON.stringify(formObject));
+  } else if (nodeName === 'TEXTAREA') {
+    formObject.message = value.trim();
     localStorage.setItem('feedback-form-state', JSON.stringify(formObject));
   }
 });
@@ -38,7 +35,7 @@ form.addEventListener('input', event => {
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (formObject.email === '' || formObject.message === '') {
+  if (!formObject.email || !formObject.message) {
     alert('Please, fill in all fields!');
   } else {
     console.log(formObject);
