@@ -35,7 +35,7 @@ form.addEventListener('input', event => {
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  if (!formObject.email || !formObject.message) {
+  if (formObject.email === '' || formObject.message === '') {
     alert('Please, fill in all fields!');
   } else {
     console.log(formObject);
