@@ -1,19 +1,20 @@
 const form = document.querySelector('.feedback-form');
-const input = document.querySelector('input');
-const textarea = document.querySelector('textarea');
 const storageKey = 'feedback-form-state';
 
-const getInfoForm = JSON.parse(localStorage.getItem(storageKey)) || {};
+const input = form.elements['email'];
+const textarea = form.elements['message'];
 
 const saveFormLocalStorage = () => {
   const formObject = {
     email: input.value.trim(),
     message: textarea.value.trim(),
   };
+
   localStorage.setItem(storageKey, JSON.stringify(formObject));
 };
 
 const fillInfoForm = () => {
+  const getInfoForm = JSON.parse(localStorage.getItem(storageKey)) || {};
   if (getInfoForm) {
     input.value = getInfoForm.email || '';
     textarea.value = getInfoForm.message || '';
@@ -32,7 +33,9 @@ form.addEventListener('input', event => {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  const { email, message } = getInfoForm;
+
+  const email = input.value;
+  const message = textarea.value;
 
   if (!email || !message) {
     alert('Please, fill in all fields!');
